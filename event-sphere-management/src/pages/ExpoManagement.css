@@ -1,0 +1,169 @@
+.expo-management {
+  /* Removed padding as it's handled by AdminLayout */
+}
+
+.page-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.expo-form-card {
+  margin-bottom: 30px;
+  max-width: 900px;
+}
+
+.expo-form-card h2 {
+  margin-bottom: 24px;
+  color: #667eea;
+}
+
+.expo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.expos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 24px;
+}
+
+.expo-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.expo-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.expo-card-header h3 {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 20px;
+  flex: 1;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-draft {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-published {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-ongoing {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-completed {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.expo-theme {
+  color: #667eea;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.expo-description {
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expo-details {
+  margin-bottom: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.expo-details p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.expo-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+  font-size: 16px;
+}
+

@@ -1,0 +1,103 @@
+.sidebar {
+  min-height: calc(100vh - 70px);
+  background: var(--color-bg-sidebar);
+  font-family: var(--font-family-sans);
+  padding: 0;
+  width: 260px;
+  z-index: 11;
+  transition: width 0.25s ease, background 0.25s ease;
+  box-shadow: 1px 0 0 0 var(--color-border);
+
+  .nav {
+    overflow: hidden;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin-bottom: 60px;
+    padding-top: 1rem;
+
+    .nav-item {
+      padding: 0.25rem 1rem;
+      transition-duration: 0.25s;
+      transition-property: background;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        padding: 0.75rem 1rem;
+        color: var(--color-text-secondary);
+        border-radius: var(--radius-md);
+        transition: var(--transition-base);
+        height: 46px;
+        text-decoration: none;
+
+        i {
+          font-size: 1.125rem;
+          line-height: 1;
+          margin-right: 0.75rem;
+          color: var(--color-text-muted);
+          transition: color 0.2s ease;
+        }
+
+        .menu-title {
+          font-size: 0.875rem;
+          font-weight: var(--font-weight-medium);
+          line-height: 1;
+          vertical-align: middle;
+        }
+
+        &:hover {
+          background-color: var(--color-bg-body);
+          color: var(--color-text-primary);
+
+          i {
+            color: var(--color-primary);
+          }
+        }
+
+        &[aria-expanded="true"] {
+          background-color: var(--color-bg-body);
+          color: var(--color-primary);
+
+          i {
+            color: var(--color-primary);
+          }
+        }
+      }
+
+      &.active {
+        >.nav-link {
+          background-color: var(--color-primary-light);
+          color: var(--color-primary);
+          font-weight: var(--font-weight-semibold);
+
+          i {
+            color: var(--color-primary);
+          }
+        }
+      }
+
+      // Section Headers
+      &.nav-category {
+        padding: 1.5rem 1.5rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+    }
+  }
+}
+
+// Mobile sidebar
+@media (max-width: 991px) {
+  .sidebar {
+    margin-left: -260px;
+    transition: margin 0.25s ease;
+
+    &.active {
+      margin-left: 0;
+    }
+  }
+}

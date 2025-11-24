@@ -1,0 +1,185 @@
+.navbar {
+  font-family: var(--font-family-sans);
+  background: var(--color-bg-surface);
+  transition: background 0.25s ease;
+  box-shadow: var(--shadow-sm);
+  height: 70px;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  display: flex;
+  align-items: center;
+
+  .navbar-brand-wrapper {
+    width: 260px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-surface);
+    border-right: 1px solid var(--color-border);
+
+    .navbar-brand {
+      color: var(--color-primary);
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-bold);
+      margin-right: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+
+      &:hover {
+        color: var(--color-primary-hover);
+      }
+
+      img {
+        max-width: 100%;
+        height: 32px;
+        margin: auto;
+        vertical-align: middle;
+      }
+    }
+
+    .navbar-brand-mini {
+      display: none;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .navbar-menu-wrapper {
+    transition: width 0.25s ease;
+    color: var(--color-text-primary);
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    width: calc(100% - 260px);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .navbar-toggler {
+      border: none;
+      background: transparent;
+      color: var(--color-text-secondary);
+      font-size: 1.25rem;
+      padding: 0;
+      cursor: pointer;
+      transition: var(--transition-base);
+
+      &:hover {
+        color: var(--color-primary);
+      }
+    }
+
+    .navbar-nav {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .nav-item {
+        .nav-link {
+          color: var(--color-text-primary);
+          font-size: 0.875rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem;
+          border-radius: var(--radius-md);
+          transition: var(--transition-base);
+          text-decoration: none;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--color-bg-body);
+          }
+
+          .profile-name {
+            font-weight: var(--font-weight-medium);
+            margin-left: 0.5rem;
+          }
+
+          i {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+          }
+        }
+
+        // Dropdown styles
+        &.dropdown {
+          position: relative;
+
+          .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            background-color: var(--color-bg-surface);
+            min-width: 12rem;
+            padding: 0.5rem 0;
+            z-index: 1000;
+
+            .dropdown-item {
+              display: flex;
+              align-items: center;
+              padding: 0.5rem 1rem;
+              font-size: 0.875rem;
+              color: var(--color-text-primary);
+              transition: var(--transition-base);
+              text-decoration: none;
+
+              i {
+                margin-right: 0.75rem;
+                font-size: 1rem;
+                color: var(--color-primary);
+              }
+
+              &:hover {
+                background-color: var(--color-bg-body);
+                color: var(--color-primary);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 991px) {
+  .navbar {
+    .navbar-brand-wrapper {
+      width: 70px;
+
+      .navbar-brand {
+        display: none;
+      }
+
+      .navbar-brand-mini {
+        display: block;
+      }
+    }
+
+    .navbar-menu-wrapper {
+      width: calc(100% - 70px);
+    }
+  }
+}

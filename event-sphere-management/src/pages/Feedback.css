@@ -1,0 +1,164 @@
+.feedback-page {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.feedback-form-card {
+  margin-bottom: 30px;
+  padding: 24px;
+}
+
+.feedback-form-card h2 {
+  margin-bottom: 20px;
+  color: #667eea;
+}
+
+.feedback-form-card .form-group {
+  margin-bottom: 16px;
+}
+
+.feedback-form-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.feedback-form-card input,
+.feedback-form-card select,
+.feedback-form-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feedback-card {
+  padding: 24px;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.feedback-header h3 {
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.type-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.type-suggestion {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.type-bug {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.type-complaint {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.type-compliment {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.type-other {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-open {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-in-progress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-resolved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-closed {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.feedback-message {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.feedback-response {
+  background: #f8f9fa;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 4px solid #667eea;
+}
+
+.feedback-response strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #667eea;
+}
+
+.feedback-response p {
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.feedback-date {
+  color: #999;
+  font-size: 12px;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+}
+

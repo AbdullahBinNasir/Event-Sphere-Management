@@ -1,0 +1,124 @@
+.schedule-management {
+  /* Removed padding as it's handled by AdminLayout */
+}
+
+.page-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.expo-select {
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.session-form-card {
+  margin-bottom: 30px;
+  max-width: 900px;
+}
+
+.session-form-card h2 {
+  margin-bottom: 24px;
+  color: #667eea;
+}
+
+.session-form h3 {
+  margin: 24px 0 16px 0;
+  color: #333;
+  font-size: 18px;
+}
+
+.sessions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 24px;
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.session-header h3 {
+  margin: 0 0 4px 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.session-expo {
+  color: #667eea;
+  font-size: 14px;
+  margin: 0;
+}
+
+.type-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.type-keynote {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.type-workshop {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.type-panel {
+  background: #e9d5ff;
+  color: #6b21a8;
+}
+
+.type-networking {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.session-details {
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.session-details p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.session-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+}
+

@@ -1,0 +1,49 @@
+.analytics {
+  /* Removed padding as it's handled by AdminLayout */
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.stat-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.stat-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.info-card {
+  padding: 30px;
+}
+
+.info-card h2 {
+  color: #667eea;
+  margin-bottom: 16px;
+}
+
+.info-card p {
+  color: #666;
+  line-height: 1.6;
+}
+

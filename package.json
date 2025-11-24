@@ -1,0 +1,21 @@
+{
+  "name": "event-sphere-fullstack",
+  "version": "1.0.0",
+  "description": "Event Sphere Management - Full Stack Application",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd event-sphere-management && npm run dev",
+    "install:all": "npm install && cd backend && npm install && cd ../event-sphere-management && npm install",
+    "build": "cd event-sphere-management && npm run build",
+    "start:backend": "cd backend && npm start",
+    "start:frontend": "cd event-sphere-management && npm run preview"
+  },
+  "keywords": ["event", "management", "fullstack"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
+

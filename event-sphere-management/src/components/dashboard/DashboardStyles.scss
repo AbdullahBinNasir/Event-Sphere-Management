@@ -1,0 +1,68 @@
+// Page Header Styles
+.page-header {
+  margin-bottom: 1.5rem;
+
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    .page-title-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+    }
+  }
+
+  .breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+
+    .breadcrumb-item {
+      color: #6c757d;
+      font-size: 0.875rem;
+
+      &.active {
+        color: #495057;
+      }
+
+      &::before {
+        content: "/";
+        padding: 0 0.5rem;
+        color: #6c757d;
+      }
+
+      &:first-child::before {
+        display: none;
+      }
+    }
+  }
+}
+
+// Gradient backgrounds
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+

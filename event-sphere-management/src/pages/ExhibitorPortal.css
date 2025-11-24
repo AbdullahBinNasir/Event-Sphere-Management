@@ -1,0 +1,185 @@
+.exhibitor-section {
+  margin-bottom: 40px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  color: #1a1a1a;
+  font-size: 24px;
+  margin: 0 0 8px 0;
+}
+
+.info-message {
+  background: #e0f2fe;
+  border-left: 4px solid #0284c7;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+  color: #0c4a6e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.application-form-card {
+  margin-bottom: 24px;
+  padding: 24px;
+}
+
+.application-form-card h3 {
+  margin-bottom: 20px;
+  color: #667eea;
+}
+
+.application-form-card .form-group {
+  margin-bottom: 16px;
+}
+
+.application-form-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.application-form-card input,
+.application-form-card select,
+.application-form-card textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.applications-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.application-card {
+  padding: 20px;
+}
+
+.application-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 12px;
+}
+
+.application-header h3 {
+  margin: 0;
+  color: #1a1a1a;
+  font-size: 18px;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-approved {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.rejection-reason {
+  color: #991b1b;
+  background: #fee2e2;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  padding: 40px;
+}
+
+.expos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.expo-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.expo-card h3 {
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-size: 20px;
+}
+
+.expo-theme {
+  color: #667eea;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.expo-description {
+  color: #666;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expo-details {
+  margin-bottom: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.expo-details p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.expo-status {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.applied-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #d1fae5;
+  color: #065f46;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+

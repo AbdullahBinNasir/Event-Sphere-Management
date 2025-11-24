@@ -1,0 +1,185 @@
+// Global styles for dashboard pages
+
+// Form styles
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-family: var(--font-family-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-surface);
+    transition: var(--transition-base);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px var(--color-primary-light);
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+// Status badges
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+
+  &.status-pending {
+    background: #fffbeb;
+    /* Amber 50 */
+    color: #b45309;
+    /* Amber 700 */
+    border: 1px solid #fcd34d;
+  }
+
+  &.status-approved {
+    background: #ecfdf5;
+    /* Emerald 50 */
+    color: #047857;
+    /* Emerald 700 */
+    border: 1px solid #6ee7b7;
+  }
+
+  &.status-rejected {
+    background: #fef2f2;
+    /* Red 50 */
+    color: #b91c1c;
+    /* Red 700 */
+    border: 1px solid #fca5a5;
+  }
+
+  &.status-published {
+    background: #eff6ff;
+    /* Blue 50 */
+    color: #1d4ed8;
+    /* Blue 700 */
+    border: 1px solid #93c5fd;
+  }
+
+  &.status-draft {
+    background: #f8fafc;
+    /* Slate 50 */
+    color: #475569;
+    /* Slate 600 */
+    border: 1px solid #cbd5e1;
+  }
+}
+
+// Empty state
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  background: var(--color-bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+// Grid layouts
+.stats-grid,
+.expos-grid,
+.applications-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+// Section headers
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    letter-spacing: -0.025em;
+  }
+}
+
+// Filters
+.filters {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  background: var(--color-bg-surface);
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      font-weight: var(--font-weight-medium);
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+    }
+
+    select {
+      padding: 0.5rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      min-width: 200px;
+      font-size: 0.875rem;
+      color: var(--color-text-primary);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px var(--color-primary-light);
+      }
+    }
+  }
+}
