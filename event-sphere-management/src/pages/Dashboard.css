@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+.page-subtitle {
+  margin-top: 4px;
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+
 .dashboard-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;

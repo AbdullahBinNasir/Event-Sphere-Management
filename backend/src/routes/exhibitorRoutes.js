@@ -6,10 +6,14 @@ import {
   approveApplication,
   rejectApplication,
   getMyApplications,
+  getApprovedExhibitors,
 } from '../controllers/exhibitorController.js'
 import { protect, authorize } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
+
+// Public route - Get approved exhibitors (for attendees)
+router.get('/approved', getApprovedExhibitors)
 
 // Exhibitor routes
 router.get('/my-applications', protect, authorize('exhibitor'), getMyApplications)

@@ -1,4 +1,5 @@
 import Session from '../models/Session.js'
+import { createNotification } from './notificationController.js'
 
 // @desc    Get all sessions
 // @route   GET /api/sessions
@@ -163,7 +164,7 @@ export const registerForSession = async (req, res) => {
     }
 
     // Check if already registered
-    if (session.registeredAttendees.includes(req.user.id)) {
+    if (session.registeredAttendees.some((attendee) => attendee.toString() === req.user._id.toString())) {
       return res.status(400).json({
         success: false,
         message: 'You are already registered for this session',
@@ -178,8 +179,14 @@ export const registerForSession = async (req, res) => {
       })
     }
 
-    session.registeredAttendees.push(req.user.id)
+    session.registeredAttendees.push(req.user._id)
     await session.save()
+
+    await createNotification(
+      req.user._id,
+      `You're registered for session "${session.title}".`,
+      'success'
+    )
 
     res.json({
       success: true,
@@ -210,11 +217,25 @@ export const unregisterFromSession = async (req, res) => {
       })
     }
 
+    const initialCount = session.registeredAttendees.length
     session.registeredAttendees = session.registeredAttendees.filter(
-      (id) => id.toString() !== req.user.id.toString()
+      (id) => id.toString() !== req.user._id.toString()
     )
 
+    if (session.registeredAttendees.length === initialCount) {
+      return res.status(404).json({
+        success: false,
+        message: 'You are not registered for this session',
+      })
+    }
+
     await session.save()
+
+    await createNotification(
+      req.user._id,
+      `You have been unregistered from session "${session.title}".`,
+      'info'
+    )
 
     res.json({
       success: true,

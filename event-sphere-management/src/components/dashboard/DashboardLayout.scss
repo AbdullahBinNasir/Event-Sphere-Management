@@ -1,6 +1,6 @@
-// Import dashboard styles
-@import './DashboardStyles.scss';
-@import './GlobalStyles.scss';
+// Import dashboard styles using @use (modern Sass syntax)
+@use './DashboardStyles.scss' as *;
+@use './GlobalStyles.scss' as *;
 
 // Basic layout styles
 .container-scroller {

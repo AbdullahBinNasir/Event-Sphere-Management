@@ -32,7 +32,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <div className="container-scroller">
-      <Navbar user={user} />
+      <Navbar />
       <div className="container-fluid page-body-wrapper">
         <Sidebar menuItems={menuItems} currentPath={location.pathname} user={user} />
         <div className="main-panel">

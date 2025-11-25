@@ -60,3 +60,39 @@ export const deleteExpo = async (id) => {
   }
 }
 
+export const registerForExpo = async (expoId) => {
+  try {
+    const response = await api.post(`/expos/${expoId}/register`)
+    return { success: true, data: response.data.data }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.message || 'Failed to register for expo',
+    }
+  }
+}
+
+export const unregisterFromExpo = async (expoId) => {
+  try {
+    const response = await api.delete(`/expos/${expoId}/register`)
+    return { success: true, data: response.data.data }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.message || 'Failed to cancel registration',
+    }
+  }
+}
+
+export const getMyExpoRegistrations = async () => {
+  try {
+    const response = await api.get('/expos/my-registrations')
+    return { success: true, data: response.data.data }
+  } catch (error) {
+    return {
+      success: false,
+      error: error.response?.data?.message || 'Failed to fetch registrations',
+    }
+  }
+}
+

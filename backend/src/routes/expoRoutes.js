@@ -5,10 +5,18 @@ import {
   createExpo,
   updateExpo,
   deleteExpo,
+  registerForExpo,
+  cancelExpoRegistration,
+  getMyRegistrations,
 } from '../controllers/expoController.js'
 import { protect, authorize } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
+
+// Attendee routes
+router.get('/my-registrations', protect, authorize('attendee'), getMyRegistrations)
+router.post('/:id/register', protect, authorize('attendee'), registerForExpo)
+router.delete('/:id/register', protect, authorize('attendee'), cancelExpoRegistration)
 
 // Public routes
 router.get('/', getExpos)

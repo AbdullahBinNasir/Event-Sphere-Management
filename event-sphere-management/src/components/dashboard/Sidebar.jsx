@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext'
 import './Sidebar.scss'
 
 const Sidebar = ({ menuItems, currentPath, user }) => {
+  const { logout } = useAuth()
   const [activeMenu, setActiveMenu] = useState(null)
 
   const isPathActive = (path) => {
@@ -55,6 +56,22 @@ const Sidebar = ({ menuItems, currentPath, user }) => {
             </Link>
           </li>
         ))}
+        <li className="nav-item nav-logout">
+          <button
+            className="nav-link"
+            onClick={logout}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              width: '100%',
+              textAlign: 'left',
+              cursor: 'pointer',
+            }}
+          >
+            <i className="mdi mdi-logout menu-icon"></i>
+            <span className="menu-title">Logout</span>
+          </button>
+        </li>
       </ul>
     </nav>
   )

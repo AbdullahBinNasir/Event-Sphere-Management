@@ -252,3 +252,35 @@ export const getMyApplications = async (req, res) => {
   }
 }
 
+// @desc    Get approved exhibitors for an expo (Public/Attendee access)
+// @route   GET /api/exhibitors/approved
+// @access  Public
+export const getApprovedExhibitors = async (req, res) => {
+  try {
+    const { expoId, status } = req.query
+    const filter = {
+      status: 'approved', // Only show approved exhibitors
+    }
+
+    if (expoId) filter.expoId = expoId
+
+    const applications = await ExhibitorApplication.find(filter)
+      .populate('expoId', 'title startDate endDate location status floorPlanUrl floorPlan')
+      .populate('exhibitorId', 'name email companyName phone')
+      .sort({ companyName: 1 })
+
+    res.json({
+      success: true,
+      count: applications.length,
+      data: applications,
+    })
+  } catch (error) {
+    console.error('Get approved exhibitors error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch exhibitors',
+      error: error.message,
+    })
+  }
+}
+

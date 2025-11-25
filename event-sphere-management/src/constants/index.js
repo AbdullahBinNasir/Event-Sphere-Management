@@ -16,6 +16,7 @@ export const ROUTES = {
   REGISTER: '/register',
   FORGOT_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
+  DASHBOARD: '/admin', // Default dashboard (can be role-based)
   ADMIN_DASHBOARD: '/admin',
   EXHIBITOR_PORTAL: '/exhibitor',
   ATTENDEE_PORTAL: '/attendee',

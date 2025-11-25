@@ -1,4 +1,6 @@
 import Expo from '../models/Expo.js'
+import ExpoRegistration from '../models/ExpoRegistration.js'
+import { createNotification } from './notificationController.js'
 
 // @desc    Get all expos
 // @route   GET /api/expos
@@ -158,6 +160,141 @@ export const deleteExpo = async (req, res) => {
     res.status(500).json({
       success: false,
       message: 'Failed to delete expo',
+      error: error.message,
+    })
+  }
+}
+
+// @desc    Register attendee for an expo
+// @route   POST /api/expos/:id/register
+// @access  Private (Attendee)
+export const registerForExpo = async (req, res) => {
+  try {
+    const expo = await Expo.findById(req.params.id)
+
+    if (!expo) {
+      return res.status(404).json({
+        success: false,
+        message: 'Expo not found',
+      })
+    }
+
+    // Only allow registration for published or ongoing expos
+    if (!['published', 'ongoing'].includes(expo.status)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Registration is only available for published expos',
+      })
+    }
+
+    let registration = await ExpoRegistration.findOne({
+      expoId: expo._id,
+      attendeeId: req.user._id,
+    })
+
+    if (registration && registration.status === 'registered') {
+      return res.status(400).json({
+        success: false,
+        message: 'You are already registered for this expo',
+      })
+    }
+
+    if (!registration) {
+      registration = await ExpoRegistration.create({
+        expoId: expo._id,
+        attendeeId: req.user._id,
+      })
+    } else {
+      registration.status = 'registered'
+      registration.updatedAt = Date.now()
+      await registration.save()
+    }
+
+    await createNotification(
+      req.user._id,
+      `You're registered for ${expo.title}. See you there!`,
+      'success'
+    )
+
+    res.json({
+      success: true,
+      message: 'Successfully registered for expo',
+      data: registration,
+    })
+  } catch (error) {
+    console.error('Register for expo error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to register for expo',
+      error: error.message,
+    })
+  }
+}
+
+// @desc    Cancel expo registration
+// @route   DELETE /api/expos/:id/register
+// @access  Private (Attendee)
+export const cancelExpoRegistration = async (req, res) => {
+  try {
+    const registration = await ExpoRegistration.findOne({
+      expoId: req.params.id,
+      attendeeId: req.user._id,
+      status: 'registered',
+    })
+
+    if (!registration) {
+      return res.status(404).json({
+        success: false,
+        message: 'Registration not found',
+      })
+    }
+
+    registration.status = 'cancelled'
+    registration.updatedAt = Date.now()
+    await registration.save()
+
+    await createNotification(
+      req.user._id,
+      'Your expo registration has been cancelled.',
+      'info'
+    )
+
+    res.json({
+      success: true,
+      message: 'Registration cancelled successfully',
+    })
+  } catch (error) {
+    console.error('Cancel expo registration error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to cancel registration',
+      error: error.message,
+    })
+  }
+}
+
+// @desc    Get attendee expo registrations
+// @route   GET /api/expos/my-registrations
+// @access  Private (Attendee)
+export const getMyRegistrations = async (req, res) => {
+  try {
+    const registrations = await ExpoRegistration.find({
+      attendeeId: req.user._id,
+      status: 'registered',
+    })
+      .populate('expoId')
+      .sort({ createdAt: -1 })
+
+    res.json({
+      success: true,
+      count: registrations.length,
+      data: registrations,
+    })
+  } catch (error) {
+    console.error('Get expo registrations error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to fetch expo registrations',
       error: error.message,
     })
   }

@@ -19,26 +19,22 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please provide a password'],
-      minlength: [6, 'Password must be at least 6 characters'],
-      select: false, // Don't return password by default
+      minlength: 6,
+      select: false,
     },
     role: {
       type: String,
       enum: ['admin', 'organizer', 'exhibitor', 'attendee'],
       default: 'attendee',
     },
-    phone: {
-      type: String,
-      trim: true,
-    },
-    companyName: {
-      type: String,
-      trim: true,
-    },
     isActive: {
       type: Boolean,
       default: true,
     },
+    bookmarks: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Session'
+    }],
     resetPasswordToken: String,
     resetPasswordExpire: Date,
   },
@@ -65,4 +61,3 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 const User = mongoose.model('User', userSchema)
 
 export default User
-

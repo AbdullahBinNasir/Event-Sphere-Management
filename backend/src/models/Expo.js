@@ -48,6 +48,10 @@ const expoSchema = new mongoose.Schema(
       enum: ['draft', 'published', 'ongoing', 'completed', 'cancelled'],
       default: 'draft',
     },
+    floorPlanUrl: {
+      type: String,
+      default: ''
+    },
     floorPlan: {
       image: String,
       booths: [
@@ -92,4 +96,3 @@ const expoSchema = new mongoose.Schema(
 const Expo = mongoose.model('Expo', expoSchema)
 
 export default Expo
-
