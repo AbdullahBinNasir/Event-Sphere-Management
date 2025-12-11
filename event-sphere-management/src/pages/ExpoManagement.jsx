@@ -145,14 +145,23 @@ const ExpoManagement = () => {
   return (
     <div className="expo-management">
       <div className="page-header">
-        <div className="d-flex justify-content-between align-items-center">
-          <h3 className="page-title mb-0">
-            <span className="page-title-icon bg-gradient-primary text-white mr-2">
-              <i className="mdi mdi-calendar-multiple"></i>
-            </span> Expo Management
-          </h3>
-          <Button onClick={() => setShowForm(!showForm)}>
-            {showForm ? 'Cancel' : '+ Create New Expo'}
+        <div className="header-content">
+          <div className="title-section">
+            <div className="page-title-icon">
+              <i className="mdi mdi-calendar-multiple-check"></i>
+            </div>
+            <div>
+              <h1 className="page-title">Expo Management</h1>
+              <p className="page-subtitle">Create and manage your expo events</p>
+            </div>
+          </div>
+          <Button 
+            onClick={() => setShowForm(!showForm)}
+            variant={showForm ? "secondary" : "primary"}
+            className="create-button"
+          >
+            <i className={`mdi ${showForm ? 'mdi-close' : 'mdi-plus'}`}></i>
+            {showForm ? 'Cancel' : 'Create New Expo'}
           </Button>
         </div>
       </div>
@@ -161,7 +170,12 @@ const ExpoManagement = () => {
 
       {showForm && (
         <Card className="expo-form-card">
-          <h2>{editingExpo ? 'Edit Expo' : 'Create New Expo'}</h2>
+          <div className="form-header">
+            <h2>
+              <i className="mdi mdi-file-document-edit"></i>
+              {editingExpo ? 'Edit Expo' : 'Create New Expo'}
+            </h2>
+          </div>
           <form onSubmit={handleSubmit} className="expo-form">
             <div className="form-row">
               <div className="form-group">
@@ -296,7 +310,8 @@ const ExpoManagement = () => {
             </div>
 
             <div className="form-actions">
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary" className="submit-button">
+                <i className={`mdi ${editingExpo ? 'mdi-content-save' : 'mdi-plus-circle'}`}></i>
                 {editingExpo ? 'Update Expo' : 'Create Expo'}
               </Button>
             </div>
@@ -306,39 +321,80 @@ const ExpoManagement = () => {
 
       <div className="expos-grid">
         {expos.length === 0 ? (
-          <Card>
-            <p className="empty-state">No expos found. Create your first expo!</p>
+          <Card className="empty-state-card">
+            <div className="empty-state">
+              <i className="mdi mdi-calendar-remove"></i>
+              <h3>No Expos Found</h3>
+              <p>Create your first expo to get started!</p>
+              <Button variant="primary" onClick={() => setShowForm(true)}>
+                <i className="mdi mdi-plus"></i>
+                Create Your First Expo
+              </Button>
+            </div>
           </Card>
         ) : (
           expos.map((expo) => (
             <Card key={expo._id} className="expo-card" hover>
               <div className="expo-card-header">
-                <h3>{expo.title}</h3>
+                <div className="expo-title-section">
+                  <h3>{expo.title}</h3>
+                  {expo.theme && <p className="expo-theme">
+                    <i className="mdi mdi-tag"></i>
+                    {expo.theme}
+                  </p>}
+                </div>
                 <span className={`status-badge status-${expo.status}`}>
                   {expo.status}
                 </span>
               </div>
-              {expo.theme && <p className="expo-theme">{expo.theme}</p>}
               <p className="expo-description">{expo.description}</p>
               <div className="expo-details">
-                <p>
-                  <strong>Date:</strong>{' '}
-                  {format(new Date(expo.startDate), 'MMM dd, yyyy')} -{' '}
-                  {format(new Date(expo.endDate), 'MMM dd, yyyy')}
-                </p>
-                <p>
-                  <strong>Location:</strong> {expo.location?.venue}, {expo.location?.city}
-                </p>
+                <div className="detail-item">
+                  <i className="mdi mdi-calendar-range"></i>
+                  <div>
+                    <span className="detail-label">Date</span>
+                    <span className="detail-value">
+                      {format(new Date(expo.startDate), 'MMM dd, yyyy')} -{' '}
+                      {format(new Date(expo.endDate), 'MMM dd, yyyy')}
+                    </span>
+                  </div>
+                </div>
+                <div className="detail-item">
+                  <i className="mdi mdi-map-marker"></i>
+                  <div>
+                    <span className="detail-label">Location</span>
+                    <span className="detail-value">
+                      {expo.location?.venue}, {expo.location?.city}
+                    </span>
+                  </div>
+                </div>
+                {expo.maxExhibitors && (
+                  <div className="detail-item">
+                    <i className="mdi mdi-office-building"></i>
+                    <div>
+                      <span className="detail-label">Max Exhibitors</span>
+                      <span className="detail-value">{expo.maxExhibitors}</span>
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="expo-actions">
                 <Button
                   variant="outline"
                   size="small"
                   onClick={() => navigate(`/admin/expos/${expo._id}`)}
+                  className="action-button"
                 >
-                  View Details
+                  <i className="mdi mdi-eye"></i>
+                  View
                 </Button>
-                <Button variant="outline" size="small" onClick={() => handleEdit(expo)}>
+                <Button 
+                  variant="outline" 
+                  size="small" 
+                  onClick={() => handleEdit(expo)}
+                  className="action-button"
+                >
+                  <i className="mdi mdi-pencil"></i>
                   Edit
                 </Button>
                 {expo.status === 'draft' && (
@@ -353,7 +409,9 @@ const ExpoManagement = () => {
                         setError(result.error)
                       }
                     }}
+                    className="action-button"
                   >
+                    <i className="mdi mdi-publish"></i>
                     Publish
                   </Button>
                 )}
@@ -361,7 +419,9 @@ const ExpoManagement = () => {
                   variant="danger"
                   size="small"
                   onClick={() => handleDelete(expo._id)}
+                  className="action-button"
                 >
+                  <i className="mdi mdi-delete"></i>
                   Delete
                 </Button>
               </div>

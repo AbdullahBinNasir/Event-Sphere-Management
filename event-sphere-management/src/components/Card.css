@@ -1,4 +1,4 @@
-```css .card {
+.card {
   background: var(--color-bg-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
@@ -8,11 +8,14 @@
   transition: var(--transition-base);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
+.card-hover:hover,
 .card:hover {
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
+  border-color: var(--color-border-focus);
 }
 
 .card-body {
@@ -24,6 +27,11 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
-```
+.card-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}

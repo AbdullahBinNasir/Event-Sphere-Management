@@ -7,72 +7,104 @@ import './Dashboard.css'
 const AdminDashboard = () => {
   const navigate = useNavigate()
 
+  const dashboardCards = [
+    {
+      id: 'expo',
+      icon: 'mdi-calendar-multiple-check',
+      title: 'Expo Management',
+      description: 'Create, edit, and manage expo events with ease. Full control over your event lifecycle.',
+      route: ROUTES.EXPO_MANAGEMENT,
+      buttonText: 'Manage Expos',
+      gradient: 'gradient-expo',
+      iconBg: 'icon-bg-expo'
+    },
+    {
+      id: 'exhibitor',
+      icon: 'mdi-office-building',
+      title: 'Exhibitor Management',
+      description: 'View and manage exhibitor applications efficiently. Approve, reject, and assign booths.',
+      route: ROUTES.EXHIBITOR_MANAGEMENT,
+      buttonText: 'Manage Exhibitors',
+      gradient: 'gradient-exhibitor',
+      iconBg: 'icon-bg-exhibitor'
+    },
+    {
+      id: 'schedule',
+      icon: 'mdi-calendar-clock',
+      title: 'Schedule Management',
+      description: 'Create and manage event schedules seamlessly. Organize sessions and activities.',
+      route: ROUTES.SCHEDULE_MANAGEMENT,
+      buttonText: 'Manage Schedules',
+      gradient: 'gradient-schedule',
+      iconBg: 'icon-bg-schedule'
+    },
+    {
+      id: 'analytics',
+      icon: 'mdi-chart-line',
+      title: 'Analytics',
+      description: 'View comprehensive reports and analytics insights. Track performance and engagement.',
+      route: ROUTES.ANALYTICS,
+      buttonText: 'View Analytics',
+      gradient: 'gradient-analytics',
+      iconBg: 'icon-bg-analytics'
+    }
+  ]
+
   return (
     <div className="dashboard-container">
       <div className="page-header">
-        <h3 className="page-title">
-          <span className="page-title-icon bg-gradient-primary text-white mr-2">
-            <i className="mdi mdi-home"></i>
-          </span> Admin Dashboard
-        </h3>
-        <nav aria-label="breadcrumb">
+        <div className="header-content">
+          <div className="title-section">
+            <div className="page-title-icon">
+              <i className="mdi mdi-view-dashboard"></i>
+            </div>
+            <div>
+              <h1 className="page-title">Admin Dashboard</h1>
+              <p className="page-subtitle">Manage your events, exhibitors, and analytics</p>
+            </div>
+          </div>
+        </div>
+        <nav aria-label="breadcrumb" className="breadcrumb-nav">
           <ul className="breadcrumb">
+            <li className="breadcrumb-item">
+              <i className="mdi mdi-home"></i>
+              <span>Dashboard</span>
+            </li>
+            <li className="breadcrumb-separator">
+              <i className="mdi mdi-chevron-right"></i>
+            </li>
             <li className="breadcrumb-item active" aria-current="page">
-              <span></span>Overview
+              Overview
             </li>
           </ul>
         </nav>
       </div>
+
       <div className="dashboard-content">
         <div className="dashboard-grid">
-          <Card hover className="dashboard-card">
-            <div className="card-icon">🎯</div>
-            <h2>Expo Management</h2>
-            <p>Create, edit, and manage expo events</p>
-            <Button
-              variant="primary"
-              onClick={() => navigate(ROUTES.EXPO_MANAGEMENT)}
-              fullWidth
-            >
-              Manage Expos
-            </Button>
-          </Card>
-          <Card hover className="dashboard-card">
-            <div className="card-icon">🏢</div>
-            <h2>Exhibitor Management</h2>
-            <p>View and manage exhibitor applications</p>
-            <Button
-              variant="primary"
-              onClick={() => navigate(ROUTES.EXHIBITOR_MANAGEMENT)}
-              fullWidth
-            >
-              Manage Exhibitors
-            </Button>
-          </Card>
-          <Card hover className="dashboard-card">
-            <div className="card-icon">📅</div>
-            <h2>Schedule Management</h2>
-            <p>Create and manage event schedules</p>
-            <Button
-              variant="primary"
-              onClick={() => navigate(ROUTES.SCHEDULE_MANAGEMENT)}
-              fullWidth
-            >
-              Manage Schedules
-            </Button>
-          </Card>
-          <Card hover className="dashboard-card">
-            <div className="card-icon">📊</div>
-            <h2>Analytics</h2>
-            <p>View reports and analytics</p>
-            <Button
-              variant="primary"
-              onClick={() => navigate(ROUTES.ANALYTICS)}
-              fullWidth
-            >
-              View Analytics
-            </Button>
-          </Card>
+          {dashboardCards.map((card) => (
+            <Card key={card.id} hover className="dashboard-card">
+              <div className="card-content">
+                <div className={`card-icon-wrapper ${card.iconBg}`}>
+                  <div className="card-icon">
+                    <i className={`mdi ${card.icon}`}></i>
+                  </div>
+                </div>
+                <h2 className="card-title">{card.title}</h2>
+                <p className="card-description">{card.description}</p>
+                <Button
+                  variant="primary"
+                  onClick={() => navigate(card.route)}
+                  fullWidth
+                  className="card-button"
+                >
+                  <i className="mdi mdi-arrow-right"></i>
+                  {card.buttonText}
+                </Button>
+              </div>
+              <div className={`card-gradient-overlay ${card.gradient}`}></div>
+            </Card>
+          ))}
         </div>
       </div>
     </div>

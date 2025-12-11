@@ -56,11 +56,13 @@ const ExhibitorManagement = () => {
 
   const handleReject = async (id) => {
     const reason = prompt('Enter rejection reason:') || 'Application rejected'
-    const result = await exhibitorService.rejectApplication(id, reason)
-    if (result.success) {
-      loadApplications()
-    } else {
-      setError(result.error)
+    if (reason) {
+      const result = await exhibitorService.rejectApplication(id, reason)
+      if (result.success) {
+        loadApplications()
+      } else {
+        setError(result.error)
+      }
     }
   }
 
@@ -71,84 +73,142 @@ const ExhibitorManagement = () => {
   return (
     <div className="exhibitor-management">
       <div className="page-header">
-        <h3 className="page-title">
-          <span className="page-title-icon bg-gradient-primary text-white mr-2">
-            <i className="mdi mdi-office-building"></i>
-          </span> Exhibitor Management
-        </h3>
+        <div className="header-content">
+          <div className="title-section">
+            <div className="page-title-icon">
+              <i className="mdi mdi-office-building"></i>
+            </div>
+            <div>
+              <h1 className="page-title">Exhibitor Management</h1>
+              <p className="page-subtitle">Review and manage exhibitor applications</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       {error && <Alert type="error" message={error} />}
 
-      <div className="filters">
-        <div className="filter-group">
-          <label>Filter by Expo:</label>
-          <select value={selectedExpo} onChange={(e) => setSelectedExpo(e.target.value)}>
-            <option value="">All Expos</option>
-            {expos.map((expo) => (
-              <option key={expo._id} value={expo._id}>
-                {expo.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="filter-group">
-          <label>Filter by Status:</label>
-          <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
-            <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
-          </select>
+      <div className="filters-section">
+        <div className="filters">
+          <div className="filter-group">
+            <label>
+              <i className="mdi mdi-filter"></i>
+              Filter by Expo
+            </label>
+            <div className="select-wrapper">
+              <i className="mdi mdi-calendar-multiple select-icon"></i>
+              <select value={selectedExpo} onChange={(e) => setSelectedExpo(e.target.value)}>
+                <option value="">All Expos</option>
+                {expos.map((expo) => (
+                  <option key={expo._id} value={expo._id}>
+                    {expo.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="filter-group">
+            <label>
+              <i className="mdi mdi-filter"></i>
+              Filter by Status
+            </label>
+            <div className="select-wrapper">
+              <i className="mdi mdi-flag select-icon"></i>
+              <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+                <option value="">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="applications-list">
         {applications.length === 0 ? (
-          <Card>
-            <p className="empty-state">No applications found</p>
+          <Card className="empty-state-card">
+            <div className="empty-state">
+              <i className="mdi mdi-file-document-remove"></i>
+              <h3>No Applications Found</h3>
+              <p>No exhibitor applications match your current filters.</p>
+            </div>
           </Card>
         ) : (
           applications.map((app) => (
-            <Card key={app._id} className="application-card">
+            <Card key={app._id} className="application-card" hover>
               <div className="application-header">
-                <div>
+                <div className="application-title-section">
                   <h3>{app.companyName}</h3>
-                  <p className="expo-name">{app.expoId?.title}</p>
+                  <p className="expo-name">
+                    <i className="mdi mdi-calendar-star"></i>
+                    {app.expoId?.title}
+                  </p>
                 </div>
                 <span className={`status-badge status-${app.status}`}>
                   {app.status}
                 </span>
               </div>
               <div className="application-details">
-                <p>
-                  <strong>Exhibitor:</strong> {app.exhibitorId?.name} ({app.exhibitorId?.email})
-                </p>
+                <div className="detail-item">
+                  <i className="mdi mdi-account"></i>
+                  <div>
+                    <span className="detail-label">Exhibitor</span>
+                    <span className="detail-value">
+                      {app.exhibitorId?.name} ({app.exhibitorId?.email})
+                    </span>
+                  </div>
+                </div>
                 {app.companyDescription && (
-                  <p>
-                    <strong>Description:</strong> {app.companyDescription}
-                  </p>
+                  <div className="detail-item">
+                    <i className="mdi mdi-text"></i>
+                    <div>
+                      <span className="detail-label">Description</span>
+                      <span className="detail-value">{app.companyDescription}</span>
+                    </div>
+                  </div>
                 )}
                 {app.boothNumber && (
-                  <p>
-                    <strong>Booth Number:</strong> {app.boothNumber}
-                  </p>
+                  <div className="detail-item">
+                    <i className="mdi mdi-store"></i>
+                    <div>
+                      <span className="detail-label">Booth Number</span>
+                      <span className="detail-value">{app.boothNumber}</span>
+                    </div>
+                  </div>
                 )}
                 {app.rejectionReason && (
-                  <p className="rejection-reason">
-                    <strong>Rejection Reason:</strong> {app.rejectionReason}
-                  </p>
+                  <div className="rejection-reason">
+                    <i className="mdi mdi-alert-circle"></i>
+                    <div>
+                      <span className="rejection-label">Rejection Reason</span>
+                      <span className="rejection-text">{app.rejectionReason}</span>
+                    </div>
+                  </div>
                 )}
-                <p className="application-date">
+                <div className="application-date">
+                  <i className="mdi mdi-clock-outline"></i>
                   Applied: {format(new Date(app.createdAt), 'MMM dd, yyyy')}
-                </p>
+                </div>
               </div>
               {app.status === 'pending' && (
                 <div className="application-actions">
-                  <Button variant="success" size="small" onClick={() => handleApprove(app._id)}>
+                  <Button 
+                    variant="success" 
+                    size="small" 
+                    onClick={() => handleApprove(app._id)}
+                    className="action-button"
+                  >
+                    <i className="mdi mdi-check-circle"></i>
                     Approve
                   </Button>
-                  <Button variant="danger" size="small" onClick={() => handleReject(app._id)}>
+                  <Button 
+                    variant="danger" 
+                    size="small" 
+                    onClick={() => handleReject(app._id)}
+                    className="action-button"
+                  >
+                    <i className="mdi mdi-close-circle"></i>
                     Reject
                   </Button>
                 </div>

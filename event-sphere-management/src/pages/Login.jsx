@@ -55,48 +55,110 @@ const Login = () => {
 
   return (
     <div className="login-container">
+      <div className="login-background">
+        <div className="bg-decoration circle-1"></div>
+        <div className="bg-decoration circle-2"></div>
+        <div className="bg-decoration circle-3"></div>
+      </div>
+      
       <div className="login-card">
         <div className="login-header">
-          <h1>Event Sphere</h1>
+          <div className="logo-wrapper">
+            <div className="logo-icon">
+              <i className="mdi mdi-calendar-star"></i>
+            </div>
+          </div>
+          <h1 className="login-title">
+            <span className="gradient-text">Event Sphere</span>
+          </h1>
           <p className="login-subtitle">Management Platform</p>
         </div>
-        <h2>Welcome Back</h2>
-        <p className="login-description">Sign in to continue to your account</p>
-        
-        {error && (
-          <Alert type="error" message={error} />
-        )}
-        
-        <form onSubmit={handleSubmit} className="login-form">
-          <Input
-            label="Email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            placeholder="Enter your email"
-          />
-          <Input
-            label="Password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            placeholder="Enter your password"
-          />
-          <div className="form-actions">
-            <Link to={ROUTES.FORGOT_PASSWORD} className="forgot-password-link">
-              Forgot Password?
+
+        <div className="login-content">
+          <h2 className="welcome-title">Welcome Back</h2>
+          <p className="login-description">Sign in to continue to your account</p>
+          
+          {error && (
+            <Alert type="error" message={error} />
+          )}
+          
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="input-wrapper">
+              <label htmlFor="email" className="input-label">
+                <i className="mdi mdi-email-outline"></i>
+                Email Address
+              </label>
+              <div className="input-container">
+                <i className="mdi mdi-email input-icon"></i>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your email"
+                  className="modern-input"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            <div className="input-wrapper">
+              <label htmlFor="password" className="input-label">
+                <i className="mdi mdi-lock-outline"></i>
+                Password
+              </label>
+              <div className="input-container">
+                <i className="mdi mdi-lock input-icon"></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  placeholder="Enter your password"
+                  className="modern-input"
+                  disabled={loading}
+                />
+              </div>
+            </div>
+
+            <div className="form-actions">
+              <Link to={ROUTES.FORGOT_PASSWORD} className="forgot-password-link">
+                <i className="mdi mdi-help-circle-outline"></i>
+                Forgot Password?
+              </Link>
+            </div>
+
+            <Button 
+              type="submit" 
+              fullWidth 
+              disabled={loading}
+              className="login-button"
+            >
+              {loading ? (
+                <>
+                  <i className="mdi mdi-loading mdi-spin"></i>
+                  Logging in...
+                </>
+              ) : (
+                <>
+                  <i className="mdi mdi-login"></i>
+                  Sign In
+                </>
+              )}
+            </Button>
+          </form>
+
+          <div className="register-link">
+            <span>Don't have an account?</span>
+            <Link to={ROUTES.REGISTER} className="register-link-text">
+              <i className="mdi mdi-account-plus"></i>
+              Create Account
             </Link>
           </div>
-          <Button type="submit" fullWidth disabled={loading}>
-            {loading ? 'Logging in...' : 'Sign In'}
-          </Button>
-        </form>
-        <div className="register-link">
-          Don't have an account? <Link to={ROUTES.REGISTER}>Create Account</Link>
         </div>
       </div>
     </div>

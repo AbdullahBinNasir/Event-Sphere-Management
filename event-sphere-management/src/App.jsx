@@ -24,6 +24,9 @@ import Feedback from './pages/Feedback'
 import './App.css'
 
 function App() {
+  // #region agent log
+  fetch('http://127.0.0.1:7242/ingest/0256a869-b573-41db-a6db-d41a33bb5131',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'App.jsx:26',message:'App component rendering',data:{routesCount:Object.keys(ROUTES).length},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'B'})}).catch(()=>{});
+  // #endregion
   return (
     <AuthProvider>
       <Router>

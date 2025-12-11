@@ -33,8 +33,14 @@ export const register = async (userData) => {
  * Login user
  */
 export const login = async (email, password) => {
+  // #region agent log
+  fetch('http://127.0.0.1:7242/ingest/0256a869-b573-41db-a6db-d41a33bb5131',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'authService.js:35',message:'Login service called',data:{hasEmail:!!email},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+  // #endregion
   try {
     const response = await api.post('/auth/login', { email, password })
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/0256a869-b573-41db-a6db-d41a33bb5131',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'authService.js:38',message:'Login API response received',data:{status:response.status,hasToken:!!response.data.token,hasUser:!!response.data.user},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     const { token, user } = response.data
     
     if (token) {
@@ -44,6 +50,9 @@ export const login = async (email, password) => {
     
     return { success: true, data: response.data }
   } catch (error) {
+    // #region agent log
+    fetch('http://127.0.0.1:7242/ingest/0256a869-b573-41db-a6db-d41a33bb5131',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'authService.js:49',message:'Login API error',data:{status:error.response?.status,message:error.response?.data?.message,errorMessage:error.message},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
     return {
       success: false,
       error: error.response?.data?.message || 'Login failed',

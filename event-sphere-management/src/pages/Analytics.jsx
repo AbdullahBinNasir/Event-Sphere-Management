@@ -64,62 +64,122 @@ const Analytics = () => {
     return <Loading fullScreen />
   }
 
+  const statCards = [
+    {
+      id: 'expos',
+      icon: 'mdi-calendar-multiple-check',
+      value: stats.totalExpos,
+      label: 'Total Expos',
+      gradient: 'gradient-expos',
+      iconBg: 'icon-bg-expos',
+      trend: null,
+    },
+    {
+      id: 'applications',
+      icon: 'mdi-file-document-multiple',
+      value: stats.totalApplications,
+      label: 'Total Applications',
+      gradient: 'gradient-applications',
+      iconBg: 'icon-bg-applications',
+      trend: null,
+    },
+    {
+      id: 'pending',
+      icon: 'mdi-clock-outline',
+      value: stats.pendingApplications,
+      label: 'Pending Applications',
+      gradient: 'gradient-pending',
+      iconBg: 'icon-bg-pending',
+      trend: null,
+    },
+    {
+      id: 'approved',
+      icon: 'mdi-check-circle',
+      value: stats.approvedApplications,
+      label: 'Approved Applications',
+      gradient: 'gradient-approved',
+      iconBg: 'icon-bg-approved',
+      trend: null,
+    },
+    {
+      id: 'sessions',
+      icon: 'mdi-calendar-clock',
+      value: stats.totalSessions,
+      label: 'Total Sessions',
+      gradient: 'gradient-sessions',
+      iconBg: 'icon-bg-sessions',
+      trend: null,
+    },
+    {
+      id: 'registrations',
+      icon: 'mdi-account-group',
+      value: stats.totalRegistrations,
+      label: 'Session Registrations',
+      gradient: 'gradient-registrations',
+      iconBg: 'icon-bg-registrations',
+      trend: null,
+    },
+  ]
+
   return (
-    <div>
+    <div className="analytics-page">
       <div className="page-header">
-        <h3 className="page-title">
-          <span className="page-title-icon bg-gradient-primary text-white mr-2">
-            <i className="mdi mdi-chart-line"></i>
-          </span> Analytics & Reports
-        </h3>
-      </div>
-      <div className="analytics">
-
-      <div className="stats-grid">
-        <Card className="stat-card">
-          <div className="stat-icon">🎯</div>
-          <div className="stat-value">{stats.totalExpos}</div>
-          <div className="stat-label">Total Expos</div>
-        </Card>
-
-        <Card className="stat-card">
-          <div className="stat-icon">🏢</div>
-          <div className="stat-value">{stats.totalApplications}</div>
-          <div className="stat-label">Total Applications</div>
-        </Card>
-
-        <Card className="stat-card">
-          <div className="stat-icon">⏳</div>
-          <div className="stat-value">{stats.pendingApplications}</div>
-          <div className="stat-label">Pending Applications</div>
-        </Card>
-
-        <Card className="stat-card">
-          <div className="stat-icon">✅</div>
-          <div className="stat-value">{stats.approvedApplications}</div>
-          <div className="stat-label">Approved Applications</div>
-        </Card>
-
-        <Card className="stat-card">
-          <div className="stat-icon">📅</div>
-          <div className="stat-value">{stats.totalSessions}</div>
-          <div className="stat-label">Total Sessions</div>
-        </Card>
-
-        <Card className="stat-card">
-          <div className="stat-icon">👥</div>
-          <div className="stat-value">{stats.totalRegistrations}</div>
-          <div className="stat-label">Session Registrations</div>
-        </Card>
+        <div className="header-content">
+          <div className="title-section">
+            <div className="page-title-icon">
+              <i className="mdi mdi-chart-line"></i>
+            </div>
+            <div>
+              <h1 className="page-title">Analytics & Reports</h1>
+              <p className="page-subtitle">Comprehensive insights into your event management</p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <Card className="info-card">
-        <h2>Analytics Overview</h2>
-        <p>
-          This dashboard provides an overview of your event management system. More detailed
-          analytics and reporting features will be available in future updates.
-        </p>
-      </Card>
+      <div className="analytics-content">
+        <div className="stats-grid">
+          {statCards.map((stat) => (
+            <Card key={stat.id} className="stat-card" hover>
+              <div className={`stat-icon-wrapper ${stat.iconBg}`}>
+                <i className={`mdi ${stat.icon}`}></i>
+              </div>
+              <div className="stat-content">
+                <div className="stat-value">{stat.value.toLocaleString()}</div>
+                <div className="stat-label">{stat.label}</div>
+              </div>
+              <div className={`stat-gradient-overlay ${stat.gradient}`}></div>
+            </Card>
+          ))}
+        </div>
+
+        <Card className="info-card">
+          <div className="info-header">
+            <div className="info-icon">
+              <i className="mdi mdi-information"></i>
+            </div>
+            <h2>Analytics Overview</h2>
+          </div>
+          <p>
+            This dashboard provides a comprehensive overview of your event management system. 
+            Track your expos, exhibitor applications, sessions, and registrations all in one place. 
+            More detailed analytics and reporting features will be available in future updates.
+          </p>
+          <div className="info-features">
+            <div className="feature-item">
+              <i className="mdi mdi-chart-bar"></i>
+              <span>Real-time Statistics</span>
+            </div>
+            <div className="feature-item">
+              <i className="mdi mdi-trending-up"></i>
+              <span>Performance Tracking</span>
+            </div>
+            <div className="feature-item">
+              <i className="mdi mdi-database"></i>
+              <span>Data Insights</span>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   )

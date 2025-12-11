@@ -162,41 +162,57 @@ const ScheduleManagement = () => {
   return (
     <div className="schedule-management">
       <div className="page-header">
-        <div className="d-flex justify-content-between align-items-center">
-          <h3 className="page-title mb-0">
-            <span className="page-title-icon bg-gradient-primary text-white mr-2">
+        <div className="header-content">
+          <div className="title-section">
+            <div className="page-title-icon">
               <i className="mdi mdi-calendar-clock"></i>
-            </span> Schedule Management
-          </h3>
-          <div className="d-flex align-items-center gap-3">
-            <select
-              value={selectedExpo}
-              onChange={(e) => {
-                setSelectedExpo(e.target.value)
-                setFormData({ ...formData, expoId: e.target.value })
-              }}
-              className="form-control"
-              style={{ width: 'auto', minWidth: '200px' }}
+            </div>
+            <div>
+              <h1 className="page-title">Schedule Management</h1>
+              <p className="page-subtitle">Create and manage event sessions</p>
+            </div>
+          </div>
+          <div className="header-actions">
+            <div className="select-wrapper">
+              <i className="mdi mdi-calendar-multiple select-icon"></i>
+              <select
+                value={selectedExpo}
+                onChange={(e) => {
+                  setSelectedExpo(e.target.value)
+                  setFormData({ ...formData, expoId: e.target.value })
+                }}
+                className="expo-select"
+              >
+                <option value="">All Expos</option>
+                {expos.map((expo) => (
+                  <option key={expo._id} value={expo._id}>
+                    {expo.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <Button 
+              onClick={() => setShowForm(!showForm)}
+              variant={showForm ? "secondary" : "primary"}
+              className="create-button"
             >
-              <option value="">All Expos</option>
-              {expos.map((expo) => (
-                <option key={expo._id} value={expo._id}>
-                  {expo.title}
-                </option>
-              ))}
-            </select>
-            <Button onClick={() => setShowForm(!showForm)}>
-              {showForm ? 'Cancel' : '+ Create Session'}
+              <i className={`mdi ${showForm ? 'mdi-close' : 'mdi-plus'}`}></i>
+              {showForm ? 'Cancel' : 'Create Session'}
             </Button>
           </div>
         </div>
       </div>
 
-        {error && <Alert type="error" message={error} />}
+      {error && <Alert type="error" message={error} />}
 
       {showForm && (
         <Card className="session-form-card">
-          <h2>{editingSession ? 'Edit Session' : 'Create New Session'}</h2>
+          <div className="form-header">
+            <h2>
+              <i className="mdi mdi-calendar-edit"></i>
+              {editingSession ? 'Edit Session' : 'Create New Session'}
+            </h2>
+          </div>
           <form onSubmit={handleSubmit} className="session-form">
             <div className="form-row">
               <div className="form-group">
@@ -293,7 +309,12 @@ const ScheduleManagement = () => {
               </div>
             </div>
 
-            <h3>Speaker Information</h3>
+            <div className="form-section-header">
+              <h3>
+                <i className="mdi mdi-account"></i>
+                Speaker Information
+              </h3>
+            </div>
             <div className="form-row">
               <div className="form-group">
                 <label>Speaker Name *</label>
@@ -348,7 +369,8 @@ const ScheduleManagement = () => {
             </div>
 
             <div className="form-actions">
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary" className="submit-button">
+                <i className={`mdi ${editingSession ? 'mdi-content-save' : 'mdi-plus-circle'}`}></i>
                 {editingSession ? 'Update Session' : 'Create Session'}
               </Button>
             </div>
@@ -358,44 +380,92 @@ const ScheduleManagement = () => {
 
       <div className="sessions-list">
         {sessions.length === 0 ? (
-          <Card>
-            <p className="empty-state">No sessions found. Create your first session!</p>
+          <Card className="empty-state-card">
+            <div className="empty-state">
+              <i className="mdi mdi-calendar-remove"></i>
+              <h3>No Sessions Found</h3>
+              <p>Create your first session to get started!</p>
+              <Button variant="primary" onClick={() => setShowForm(true)}>
+                <i className="mdi mdi-plus"></i>
+                Create Your First Session
+              </Button>
+            </div>
           </Card>
         ) : (
           sessions.map((session) => (
             <Card key={session._id} className="session-card" hover>
               <div className="session-header">
-                <div>
+                <div className="session-title-section">
                   <h3>{session.title}</h3>
-                  <p className="session-expo">{session.expoId?.title}</p>
-                </div>
-                <span className={`type-badge type-${session.type}`}>{session.type}</span>
-              </div>
-              <div className="session-details">
-                <p>
-                  <strong>Time:</strong>{' '}
-                  {format(new Date(session.startTime), 'MMM dd, yyyy HH:mm')} -{' '}
-                  {format(new Date(session.endTime), 'HH:mm')}
-                </p>
-                <p>
-                  <strong>Location:</strong> {session.location}
-                </p>
-                {session.speaker && (
-                  <p>
-                    <strong>Speaker:</strong> {session.speaker.name}
-                    {session.speaker.company && ` (${session.speaker.company})`}
+                  <p className="session-expo">
+                    <i className="mdi mdi-calendar-star"></i>
+                    {session.expoId?.title}
                   </p>
+                </div>
+                <span className={`type-badge type-${session.type}`}>
+                  {session.type}
+                </span>
+              </div>
+              {session.description && (
+                <p className="session-description">{session.description}</p>
+              )}
+              <div className="session-details">
+                <div className="detail-item">
+                  <i className="mdi mdi-clock-outline"></i>
+                  <div>
+                    <span className="detail-label">Time</span>
+                    <span className="detail-value">
+                      {format(new Date(session.startTime), 'MMM dd, yyyy HH:mm')} -{' '}
+                      {format(new Date(session.endTime), 'HH:mm')}
+                    </span>
+                  </div>
+                </div>
+                <div className="detail-item">
+                  <i className="mdi mdi-map-marker"></i>
+                  <div>
+                    <span className="detail-label">Location</span>
+                    <span className="detail-value">{session.location}</span>
+                  </div>
+                </div>
+                {session.speaker && (
+                  <div className="detail-item">
+                    <i className="mdi mdi-account"></i>
+                    <div>
+                      <span className="detail-label">Speaker</span>
+                      <span className="detail-value">
+                        {session.speaker.name}
+                        {session.speaker.company && ` (${session.speaker.company})`}
+                      </span>
+                    </div>
+                  </div>
                 )}
-                <p>
-                  <strong>Registered:</strong> {session.registeredAttendees?.length || 0} /{' '}
-                  {session.maxAttendees}
-                </p>
+                <div className="detail-item">
+                  <i className="mdi mdi-account-group"></i>
+                  <div>
+                    <span className="detail-label">Registered</span>
+                    <span className="detail-value">
+                      {session.registeredAttendees?.length || 0} / {session.maxAttendees}
+                    </span>
+                  </div>
+                </div>
               </div>
               <div className="session-actions">
-                <Button variant="outline" size="small" onClick={() => handleEdit(session)}>
+                <Button 
+                  variant="outline" 
+                  size="small" 
+                  onClick={() => handleEdit(session)}
+                  className="action-button"
+                >
+                  <i className="mdi mdi-pencil"></i>
                   Edit
                 </Button>
-                <Button variant="danger" size="small" onClick={() => handleDelete(session._id)}>
+                <Button 
+                  variant="danger" 
+                  size="small" 
+                  onClick={() => handleDelete(session._id)}
+                  className="action-button"
+                >
+                  <i className="mdi mdi-delete"></i>
                   Delete
                 </Button>
               </div>
